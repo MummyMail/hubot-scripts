@@ -8,7 +8,7 @@
 #   None
 #
 # Commands:
-#   hubot gawk <feed> <N> - show N posts from the specified gawker site feed (default is all from full): full|pol|ent|style|student|lifestyle|comedy|celeb|news|tech|sport
+#   hubot gawk <feed> <N> - show N posts from the specified gawker site feed (default is all from gawker): gawk|gawker|vwag|valleywag|defamer|news|newsfeed|morningafter|morning|internet|tktk|review|books|truestories|true|domesticity|dom|antiviral|giz|gizmodo|jez|jezebel|lifehacker|lh|lhuk|lifehackeruk|kotaku
 #
 # Author:
 #   joebillings (based on hackernews.coffee by skimbrel)
@@ -39,8 +39,10 @@ unique = {
   "gizmodo": "gizmodo.",
   "jez": "jezebel.com/rss#",
   "jezebel": "jezebel.com/rss#",
-  "lifehacker": "lifehacker.",
-  "lh": "lifehacker.",
+  "lifehacker": "feeds.gawker.com/lifehacker/vip#",
+  "lh": "feeds.gawker.com/lifehacker/full#",
+  "lhuk": "feeds.feedburner.com/LifehackerUK-UKPostsOnly#",
+  "lifehackeruk": "feeds.feedburner.com/LifehackerUK-UKPostsOnly#",
   "kotaku": "kotaku.",
   "kot": "kotaku."
 }
