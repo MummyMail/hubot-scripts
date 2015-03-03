@@ -53,7 +53,7 @@ module.exports = (robot) ->
           if(count)
             items = feed.getItems(0, count)
           else
-            items = feed.getItems()
+            items = feed.getItems(0, 19)
           msg.send item.getTitle() + ": " + item.getPermalink() for item in items
         catch e
           console.log(e)

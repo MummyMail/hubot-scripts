@@ -47,7 +47,7 @@ module.exports = (robot) ->
         feed = new NodePie(body)
         try
           feed.init()
-          items = feed.getItems()
+          items = feed.getItems(0, 19)
           msg.send item.getTitle() + ": " + item.getPermalink() for item in items
         catch e
           console.log(e)
