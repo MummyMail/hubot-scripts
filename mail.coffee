@@ -9,7 +9,7 @@
 #
 # Commands:
 #   hubot mail <feed> <N> - show N posts from the specified DailyMail feed (default is all from Latest Stories): latest|news|tv|femail|top|you|books|showbiz|redcarpet
-# latest|news|tv|femail|top|you|books|showbiz|redcarpet
+#
 # Author:
 #   joebillings
 
