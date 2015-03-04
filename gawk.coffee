@@ -49,7 +49,13 @@ unique = {
 
 module.exports = (robot) ->
   robot.respond /gawk\s?(\w*)\s?(\d*)/i, (msg) ->
-    feedUrl = "http://" + unique[(msg.match[1] || "gawk")] + common
+    count = 19
+    if !isNaN(msg.match[1])
+      feedUrl = "http://" + unique["gawk"] + common
+      count = msg.match[1]
+    else
+      feedUrl = "http://" + unique[(msg.match[1] || "gawk")] + common
+      count = msg.match[2] || count
     msg.http(feedUrl).get() (err, res, body) ->
       if res.statusCode is not 200
         msg.send "Couldn’t load feed " + feedUrl
@@ -57,12 +63,25 @@ module.exports = (robot) ->
         feed = new NodePie(body)
         try
           feed.init()
-          count = msg.match[2]
-          if(count)
-            items = feed.getItems(0, count)
-          else
-            items = feed.getItems(0, 19)
-          msg.send item.getTitle() + ": " + item.getPermalink() for item in items
+          items = feed.getItems(0, count)
+          callback = (items, i) ->
+            c = i + 1;
+            if !items[c]
+              return
+            item = items[c]
+            msg.send item.getTitle() + ': ' + item.getPermalink()
+            setTimeout ( ->
+              callback items, c
+            ), 250
+            return
+          item = undefined
+          if items.length
+            item = items[0]
+            msg.send item.getTitle() + ': ' + item.getPermalink()
+            setTimeout (->
+              callback items, 0
+              return
+            ), 250
         catch e
           console.log(e)
           msg.send "Pah: " + feedUrl
