@@ -39,9 +39,13 @@ endpoint = {
 
 module.exports = (robot) ->
   robot.respond /huff\s?(\w*)\s?(\d*)/i, (msg) ->
-    #if(msg.match[1] && !(/^full|pol|ent|style|student|lifestyle|comedy|celeb|news|tech|sport$/.test(msg.match[1])))
-    #  msg.send "Oops, there’s no feed called " + msg.match[1]
-    feedUrl = baseUrl + endpoint[(msg.match[1] || "full")]
+    count = 19
+    if !isNaN(msg.match[1])
+      count = msg.match[1]
+      feedUrl = baseUrl + endpoint["full"]
+    else
+      count = msg.match[2]
+      feedUrl = baseUrl + endpoint[msg.match[1]]
     msg.http(feedUrl).get() (err, res, body) ->
       if res.statusCode is not 200
         msg.send "Couldn’t load feed " + feedUrl
@@ -49,11 +53,7 @@ module.exports = (robot) ->
         feed = new NodePie(body)
         try
           feed.init()
-          count = msg.match[2]
-          if(count)
-            items = feed.getItems(0, count)
-          else
-            items = feed.getItems(0, 19)
+          items = feed.getItems(0, count)
           msg.send item.getTitle() + ": " + item.getPermalink() for item in items
         catch e
           console.log(e)
