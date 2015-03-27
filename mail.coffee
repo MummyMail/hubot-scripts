@@ -55,7 +55,7 @@ module.exports = (robot) ->
             msg.send item.getTitle() + ': ' + item.getPermalink()
             setTimeout ( ->
               callback items, c
-            ), 250
+            ), 50
             return
           item = undefined
           if items.length
@@ -64,7 +64,7 @@ module.exports = (robot) ->
             setTimeout (->
               callback items, 0
               return
-            ), 250
+            ), 500
         catch e
           console.log(e)
           msg.send "Pah: " + feedUrl

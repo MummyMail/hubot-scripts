@@ -48,7 +48,7 @@ module.exports = (robot) ->
         try
           feed.init()
           items = feed.getItems(0, 19)
-          msg.send item.getTitle() + ": " + item.getPermalink() for item in items
+          msg.send item.getTitle() + ": " + item.getPermalink() + "&at=1010l8X" for item in items
         catch e
           console.log(e)
           msg.send "Pah: " + feedUrl
